@@ -1,0 +1,20 @@
+{
+  "comfyui": {
+    "host": "127.0.0.1",
+    "port": 8188,
+    "extra_args": ["--preview-method", "none"],
+    "startup_timeout_s": 180
+  },
+  "app": {
+    "host": "127.0.0.1",
+    "port": 7860,
+    "open_browser": true,
+    "source_url": ""
+  },
+  "paths": {
+    "comfyui_dir": "ComfyUI",
+    "models_dir": "models",
+    "outputs_dir": "outputs",
+    "history_dir": "history"
+  }
+}

@@ -1,0 +1,728 @@
+{
+  "_comment": "Local model catalog. Review each upstream model card and license before use. Quantized/repacked files are hosted by the providers listed below; weights are downloaded separately, never redistributed by this project.",
+  "destinations": {
+    "checkpoints": "ComfyUI/models/checkpoints",
+    "diffusion_models": "ComfyUI/models/diffusion_models",
+    "text_encoders": "ComfyUI/models/text_encoders",
+    "vae": "ComfyUI/models/vae",
+    "loras": "ComfyUI/models/loras",
+    "upscale_models": "ComfyUI/models/upscale_models",
+    "latentsync": "vendor/LatentSync/checkpoints",
+    "latentsync_whisper": "vendor/LatentSync/checkpoints/whisper",
+    "latentsync_vae": "vendor/LatentSync/checkpoints/vae",
+    "tts": "models/tts",
+    "voxcpm2": "models/voxcpm2",
+    "llm": "models/llm",
+    "train": "models/train",
+    "qc": "models/qc"
+  },
+  "sets": {
+    "obrazy": {
+      "label": "Images",
+      "models": [
+        "z-image-turbo",
+        "qwen-image-edit-2511",
+        "seedvr2-3b",
+        "prompt-llm"
+      ]
+    },
+    "wideo": {
+      "label": "Video and audio",
+      "models": [
+        "wan22-a14b-t2v",
+        "wan22-a14b-i2v",
+        "voxcpm2",
+        "stable-audio-open",
+        "latentsync-16",
+        "qwen-image-edit-2511",
+        "seedvr2-3b",
+        "prompt-llm"
+      ]
+    }
+  },
+  "models": [
+    {
+      "id": "z-image-turbo",
+      "name": "Z-Image-Turbo \u2014 photorealistic images",
+      "category": "image",
+      "description": "Tongyi image model, text encoder and VAE. Optimized for eight-step photorealistic generation.",
+      "repo_id": "Comfy-Org/z_image_turbo",
+      "files": [
+        {
+          "filename": "split_files/diffusion_models/z_image_turbo_bf16.safetensors",
+          "dest": "diffusion_models",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 12309866400,
+          "sha256": "2407613050b809ffdff18a4ac99af83ea6b95443ecebdf80e064a79c825574a6"
+        },
+        {
+          "filename": "split_files/text_encoders/qwen_3_4b.safetensors",
+          "dest": "text_encoders",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 8044982048,
+          "sha256": "6c671498573ac2f7a5501502ccce8d2b08ea6ca2f661c458e708f36b36edfc5a"
+        },
+        {
+          "filename": "split_files/vae/ae.safetensors",
+          "dest": "vae",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 335304388,
+          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38"
+        }
+      ],
+      "size_gb": 20.7,
+      "vram_gb": 14,
+      "license": "Apache 2.0",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/Comfy-Org/z_image_turbo"
+    },
+    {
+      "id": "z-image-turbo-lite",
+      "name": "Z-Image-Turbo Lite \u2014 photorealistic images",
+      "category": "image",
+      "description": "Int8 image model and fp8 text encoder: about half the size of the full set. For GPUs with 8\u201312 GB of VRAM.",
+      "repo_id": "Comfy-Org/z_image_turbo",
+      "files": [
+        {
+          "filename": "split_files/diffusion_models/z_image_turbo_int8_convrot.safetensors",
+          "dest": "diffusion_models",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 6201001296,
+          "sha256": "be517ebd47c912a5626a588e1aeea43e6be4a43c0cdcd2b48a2a780d9f358635"
+        },
+        {
+          "filename": "split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors",
+          "dest": "text_encoders",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 5631994051,
+          "sha256": "72450b19758172c5a7273cf7de729d1c17e7f434a104a00167624cba94f68f15"
+        },
+        {
+          "filename": "split_files/vae/ae.safetensors",
+          "dest": "vae",
+          "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+          "size_bytes": 335304388,
+          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38"
+        }
+      ],
+      "size_gb": 12.2,
+      "vram_gb": 8,
+      "license": "Apache 2.0",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/Comfy-Org/z_image_turbo"
+    },
+    {
+      "id": "wan22-a14b-t2v",
+      "name": "Wan 2.2 A14B \u2014 text to video",
+      "category": "video",
+      "description": "Wan 2.2 video generation with GGUF Q6_K weights, LightX2V acceleration LoRAs, Wan VAE and umT5 text encoder.",
+      "repo_id": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+      "files": [
+        {
+          "filename": "HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+          "dest": "diffusion_models",
+          "revision": "73eafba53a1a8f29254e4c77f92e74ea27d7cd6f",
+          "size_bytes": 12002013696,
+          "sha256": "504340d1d4eb9c754a824861234cedb5519155c125aa8dbb4c170716d899cd3b"
+        },
+        {
+          "filename": "LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+          "dest": "diffusion_models",
+          "revision": "73eafba53a1a8f29254e4c77f92e74ea27d7cd6f",
+          "size_bytes": 12002013696,
+          "sha256": "db35061810049f77f571198d6a7bab422dec94fe0bf016b145b5cfc03eaaf661"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_t2v_A14b_high_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 613518320,
+          "sha256": "89003385f8a9d53ba58fd6ede647fdc90292e8568a54683fcfe6db5556a31769"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_t2v_A14b_low_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 613518320,
+          "sha256": "4df7c206f3189472da2f92c0a42dcf308f04433d9c14302d08d56e99a3f51322"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/vae/wan_2.1_vae.safetensors",
+          "dest": "vae",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 253815318,
+          "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+          "dest": "text_encoders",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 6735906897,
+          "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+        }
+      ],
+      "size_gb": 32.3,
+      "vram_gb": 15,
+      "license": "Apache 2.0 (Wan, GGUF conversion and LightX2V LoRAs)",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF"
+    },
+    {
+      "id": "wan22-a14b-t2v-lite",
+      "name": "Wan 2.2 A14B Lite \u2014 text to video",
+      "category": "video",
+      "description": "GGUF Q4_K_M weights and a Q5_K_M text encoder with the same LightX2V acceleration LoRAs. For GPUs with 8\u201312 GB of VRAM.",
+      "repo_id": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+      "files": [
+        {
+          "filename": "HighNoise/Wan2.2-T2V-A14B-HighNoise-Q4_K_M.gguf",
+          "dest": "diffusion_models",
+          "revision": "73eafba53a1a8f29254e4c77f92e74ea27d7cd6f",
+          "size_bytes": 9650090496,
+          "sha256": "e0c490c6e316fd91ff52034e4ca66b825717e33ff11624585c0ccfcb5d410c59"
+        },
+        {
+          "filename": "LowNoise/Wan2.2-T2V-A14B-LowNoise-Q4_K_M.gguf",
+          "dest": "diffusion_models",
+          "revision": "73eafba53a1a8f29254e4c77f92e74ea27d7cd6f",
+          "size_bytes": 9650090496,
+          "sha256": "091a5bae02e14aa016bc9b10a7892efda4c629346b81c5dcebbe30ea2ac8923a"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_t2v_A14b_high_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 613518320,
+          "sha256": "89003385f8a9d53ba58fd6ede647fdc90292e8568a54683fcfe6db5556a31769"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_t2v_A14b_low_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 613518320,
+          "sha256": "4df7c206f3189472da2f92c0a42dcf308f04433d9c14302d08d56e99a3f51322"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/vae/wan_2.1_vae.safetensors",
+          "dest": "vae",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 253815318,
+          "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+        },
+        {
+          "repo_id": "city96/umt5-xxl-encoder-gguf",
+          "filename": "umt5-xxl-encoder-Q5_K_M.gguf",
+          "dest": "text_encoders",
+          "revision": "b535255bee98c2b0a59ea7c0ae2dcd0c6657b3b7",
+          "size_bytes": 4145878880,
+          "sha256": "eaea358bb438c5d211721a4feecc162000e3636e9cb96f51e216f1f44ebd12ce"
+        }
+      ],
+      "size_gb": 24.9,
+      "vram_gb": 10,
+      "license": "Apache 2.0 (Wan, GGUF conversions and LightX2V LoRAs)",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF"
+    },
+    {
+      "id": "wan22-a14b-i2v",
+      "name": "Wan 2.2 A14B \u2014 image to video",
+      "category": "video",
+      "description": "Animate a starting image and extend clips. Includes GGUF Q6_K weights and LightX2V acceleration LoRAs; shares the VAE and text encoder.",
+      "repo_id": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+      "files": [
+        {
+          "filename": "HighNoise/Wan2.2-I2V-A14B-HighNoise-Q6_K.gguf",
+          "dest": "diffusion_models",
+          "revision": "6c6717459277b9cd1f72579d78a0fd62a79e57dc",
+          "size_bytes": 12003652096,
+          "sha256": "33ab8d99b5be745d2c939055f541d09108befe3467802fdbbf22ba8e4e62383c"
+        },
+        {
+          "filename": "LowNoise/Wan2.2-I2V-A14B-LowNoise-Q6_K.gguf",
+          "dest": "diffusion_models",
+          "revision": "6c6717459277b9cd1f72579d78a0fd62a79e57dc",
+          "size_bytes": 12003652096,
+          "sha256": "962d9c937a6e882562cd234ba87c5cfc19d6e99efbf0fc31b4dd9e43eb493ae6"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 634645944,
+          "sha256": "887c3bdeb74e83859c920438e16ca31f39ab18ce189abc5f0e36f8348c5bbb19"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_i2v_A14b_low_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 739472104,
+          "sha256": "8833bd4fd7c8eabebf0bc8ee5cfaf47f4f310ce116928a02c1adf8941dd4b0f1"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/vae/wan_2.1_vae.safetensors",
+          "dest": "vae",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 253815318,
+          "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+          "dest": "text_encoders",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 6735906897,
+          "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+        }
+      ],
+      "size_gb": 32.4,
+      "vram_gb": 15,
+      "license": "Apache 2.0 (Wan, GGUF conversion and LightX2V LoRAs)",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/QuantStack/Wan2.2-I2V-A14B-GGUF"
+    },
+    {
+      "id": "wan22-a14b-i2v-lite",
+      "name": "Wan 2.2 A14B Lite \u2014 image to video",
+      "category": "video",
+      "description": "GGUF Q4_K_M weights and a Q5_K_M text encoder with the same LightX2V acceleration LoRAs. For GPUs with 8\u201312 GB of VRAM.",
+      "repo_id": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+      "files": [
+        {
+          "filename": "HighNoise/Wan2.2-I2V-A14B-HighNoise-Q4_K_M.gguf",
+          "dest": "diffusion_models",
+          "revision": "6c6717459277b9cd1f72579d78a0fd62a79e57dc",
+          "size_bytes": 9651728896,
+          "sha256": "836250abfaa3411694e2c9cf3a0cc18265329d5156d81aa116d5366b0f8f02e7"
+        },
+        {
+          "filename": "LowNoise/Wan2.2-I2V-A14B-LowNoise-Q4_K_M.gguf",
+          "dest": "diffusion_models",
+          "revision": "6c6717459277b9cd1f72579d78a0fd62a79e57dc",
+          "size_bytes": 9651728896,
+          "sha256": "e2f98d834af009d035c6b0918268f2eba0aa8a63025ce942277e2384d40b0866"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 634645944,
+          "sha256": "887c3bdeb74e83859c920438e16ca31f39ab18ce189abc5f0e36f8348c5bbb19"
+        },
+        {
+          "repo_id": "lightx2v/Wan2.2-Distill-Loras",
+          "filename": "wan2.2_i2v_A14b_low_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "dest": "loras",
+          "revision": "57adea585d1d21085e2dfc91ce3c7b646cdd9345",
+          "size_bytes": 739472104,
+          "sha256": "8833bd4fd7c8eabebf0bc8ee5cfaf47f4f310ce116928a02c1adf8941dd4b0f1"
+        },
+        {
+          "repo_id": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+          "filename": "split_files/vae/wan_2.1_vae.safetensors",
+          "dest": "vae",
+          "revision": "123acf1cc74bccbb9bfff8ac1ee72edc08c2341d",
+          "size_bytes": 253815318,
+          "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+        },
+        {
+          "repo_id": "city96/umt5-xxl-encoder-gguf",
+          "filename": "umt5-xxl-encoder-Q5_K_M.gguf",
+          "dest": "text_encoders",
+          "revision": "b535255bee98c2b0a59ea7c0ae2dcd0c6657b3b7",
+          "size_bytes": 4145878880,
+          "sha256": "eaea358bb438c5d211721a4feecc162000e3636e9cb96f51e216f1f44ebd12ce"
+        }
+      ],
+      "size_gb": 25.1,
+      "vram_gb": 10,
+      "license": "Apache 2.0 (Wan, GGUF conversions and LightX2V LoRAs)",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/QuantStack/Wan2.2-I2V-A14B-GGUF"
+    },
+    {
+      "id": "latentsync-16",
+      "name": "LatentSync 1.6 \u2014 lip sync",
+      "category": "video",
+      "description": "Align visible faces with speech. Includes LatentSync, Whisper tiny and the VAE. Review the OpenRAIL usage restrictions.",
+      "repo_id": "ByteDance/LatentSync-1.6",
+      "files": [
+        {
+          "filename": "latentsync_unet.pt",
+          "dest": "latentsync",
+          "revision": "c42c7e6c8e9c213626389fa7d9a3c444b8536353",
+          "size_bytes": 5072222488,
+          "sha256": "0a478e89eb660f82da4c35dbdde8a5adfb27f99d1b4e50edd03729e1e98316d3"
+        },
+        {
+          "filename": "whisper/tiny.pt",
+          "dest": "latentsync_whisper",
+          "revision": "c42c7e6c8e9c213626389fa7d9a3c444b8536353",
+          "size_bytes": 75572083,
+          "sha256": "65147644a518d12f04e32d6f3b26facc3f8dd46e5390956a9424a650c0ce22b9"
+        },
+        {
+          "repo_id": "stabilityai/sd-vae-ft-mse",
+          "filename": "config.json",
+          "dest": "latentsync_vae",
+          "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493",
+          "size_bytes": 547
+        },
+        {
+          "repo_id": "stabilityai/sd-vae-ft-mse",
+          "filename": "diffusion_pytorch_model.safetensors",
+          "dest": "latentsync_vae",
+          "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493",
+          "size_bytes": 334643276,
+          "sha256": "a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815"
+        }
+      ],
+      "size_gb": 5.5,
+      "vram_gb": 10,
+      "license": "OpenRAIL++ (LatentSync); MIT (Whisper, VAE)",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/ByteDance/LatentSync-1.6"
+    },
+    {
+      "id": "voxcpm2",
+      "name": "VoxCPM2 \u2014 natural speech (48 kHz)",
+      "category": "tts",
+      "description": "Local multilingual speech synthesis with descriptive synthetic voices. Use real voices only with permission.",
+      "repo_id": "openbmb/VoxCPM2",
+      "files": [
+        {
+          "filename": "model.safetensors",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 4580080592,
+          "sha256": "f7f964cfa9da23653baec6e6f7750719977ad944ed9f95fe52fe3a620506891d"
+        },
+        {
+          "filename": "audiovae.pth",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 376951122,
+          "sha256": "94b5d51e107e0507d4acc976cfdadb64edd6fd06d1f751dadbf2fd1594274bf1"
+        },
+        {
+          "filename": "config.json",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 4336
+        },
+        {
+          "filename": "tokenizer.json",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 3676772
+        },
+        {
+          "filename": "tokenizer_config.json",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 5059
+        },
+        {
+          "filename": "special_tokens_map.json",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 1632
+        },
+        {
+          "filename": "tokenization_voxcpm2.py",
+          "dest": "voxcpm2",
+          "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+          "size_bytes": 2895
+        }
+      ],
+      "size_gb": 5.0,
+      "vram_gb": 8,
+      "license": "Apache 2.0",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/openbmb/VoxCPM2"
+    },
+    {
+      "id": "stable-audio-open",
+      "name": "Stable Audio Open 1.0 \u2014 ambience and effects",
+      "category": "audio",
+      "description": "Local stereo ambience and sound effects. Commercial use is conditional on the upstream Stable Audio Community License.",
+      "repo_id": "Comfy-Org/stable-audio-open-1.0",
+      "files": [
+        {
+          "filename": "stable-audio-open-1.0.safetensors",
+          "dest": "checkpoints",
+          "revision": "3eb100708b423cf59fc5bf2a152f5cc1e7718062",
+          "size_bytes": 4853889016,
+          "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+        },
+        {
+          "repo_id": "google-t5/t5-base",
+          "filename": "model.safetensors",
+          "save_as": "t5_base.safetensors",
+          "dest": "text_encoders",
+          "revision": "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1",
+          "size_bytes": 891646390,
+          "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+        }
+      ],
+      "size_gb": 5.7,
+      "vram_gb": 6,
+      "license": "Stable Audio Community License; conditional commercial use. Review https://huggingface.co/stabilityai/stable-audio-open-1.0/blob/main/LICENSE",
+      "commercial": "conditional",
+      "recommended": true,
+      "source_url": "https://huggingface.co/Comfy-Org/stable-audio-open-1.0"
+    },
+    {
+      "id": "qwen-image-edit-2511",
+      "name": "Qwen-Image-Edit-2511 \u2014 reference images",
+      "category": "image",
+      "description": "Compose and edit reference images while retaining clothing details, colors and identity. Includes the image model, Lightning LoRA, vision encoder and VAE.",
+      "repo_id": "Comfy-Org/Qwen-Image-Edit_ComfyUI",
+      "files": [
+        {
+          "filename": "split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+          "dest": "diffusion_models",
+          "revision": "f68ace85e60b4a02a323e394253731947657b7d2",
+          "size_bytes": 20499083824,
+          "sha256": "11b5af5ac601821d73930c84846c9a158e67177356daf927ce1c8d10f3963829"
+        },
+        {
+          "repo_id": "lightx2v/Qwen-Image-Edit-2511-Lightning",
+          "filename": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "dest": "loras",
+          "revision": "107d238d68b8387e32843d0b4a2e24ceb0d3ad86",
+          "size_bytes": 849608296,
+          "sha256": "22226e8d05d354bb356627d428809f5afd7819399b077238a2b70a82883a904f"
+        },
+        {
+          "repo_id": "Comfy-Org/Qwen-Image_ComfyUI",
+          "filename": "split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+          "dest": "text_encoders",
+          "revision": "1f12b17be14c89b026c51a91d67c32f84bb047bc",
+          "size_bytes": 9384670680,
+          "sha256": "cb5636d852a0ea6a9075ab1bef496c0db7aef13c02350571e388aea959c5c0b4"
+        },
+        {
+          "repo_id": "Comfy-Org/Qwen-Image_ComfyUI",
+          "filename": "split_files/vae/qwen_image_vae.safetensors",
+          "dest": "vae",
+          "revision": "1f12b17be14c89b026c51a91d67c32f84bb047bc",
+          "size_bytes": 253806246,
+          "sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f"
+        }
+      ],
+      "size_gb": 31.0,
+      "vram_gb": 16,
+      "license": "Apache 2.0 (Qwen image model and Lightning LoRA)",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI"
+    },
+    {
+      "id": "qwen-image-edit-2511-lite",
+      "name": "Qwen-Image-Edit-2511 Lite \u2014 reference images",
+      "category": "image",
+      "description": "GGUF Q4_K_M edit model with the same Lightning LoRA, text encoder and VAE. For GPUs with 8\u201312 GB of VRAM.",
+      "repo_id": "unsloth/Qwen-Image-Edit-2511-GGUF",
+      "files": [
+        {
+          "filename": "qwen-image-edit-2511-Q4_K_M.gguf",
+          "dest": "diffusion_models",
+          "revision": "52838251db242ddd8e8d0118de36c71006d7c397",
+          "size_bytes": 12842830432,
+          "sha256": "07951f61941a81e236cbd4a9b6f250d49626b3ba518f260135bf2e01a87cf1c8"
+        },
+        {
+          "repo_id": "lightx2v/Qwen-Image-Edit-2511-Lightning",
+          "filename": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "dest": "loras",
+          "revision": "107d238d68b8387e32843d0b4a2e24ceb0d3ad86",
+          "size_bytes": 849608296,
+          "sha256": "22226e8d05d354bb356627d428809f5afd7819399b077238a2b70a82883a904f"
+        },
+        {
+          "repo_id": "Comfy-Org/Qwen-Image_ComfyUI",
+          "filename": "split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+          "dest": "text_encoders",
+          "revision": "1f12b17be14c89b026c51a91d67c32f84bb047bc",
+          "size_bytes": 9384670680,
+          "sha256": "cb5636d852a0ea6a9075ab1bef496c0db7aef13c02350571e388aea959c5c0b4"
+        },
+        {
+          "repo_id": "Comfy-Org/Qwen-Image_ComfyUI",
+          "filename": "split_files/vae/qwen_image_vae.safetensors",
+          "dest": "vae",
+          "revision": "1f12b17be14c89b026c51a91d67c32f84bb047bc",
+          "size_bytes": 253806246,
+          "sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f"
+        }
+      ],
+      "size_gb": 23.3,
+      "vram_gb": 10,
+      "license": "Apache 2.0 (Qwen image model, Unsloth GGUF conversion and Lightning LoRA)",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI"
+    },
+    {
+      "id": "seedvr2-3b",
+      "name": "SeedVR2 3B \u2014 upscale to 1080p",
+      "category": "video",
+      "description": "Detail-preserving image and video upscaling with INT8 model weights and VAE.",
+      "repo_id": "Comfy-Org/SeedVR2",
+      "files": [
+        {
+          "filename": "diffusion_models/seedvr2_3b_int8_convrot.safetensors",
+          "dest": "diffusion_models",
+          "revision": "df48879708206a403d2a61acd55578c2e80fd233",
+          "size_bytes": 3458259704,
+          "sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157"
+        },
+        {
+          "filename": "vae/seedvr2_ema_vae_fp16.safetensors",
+          "dest": "vae",
+          "revision": "df48879708206a403d2a61acd55578c2e80fd233",
+          "size_bytes": 501324814,
+          "sha256": "20678548f420d98d26f11442d3528f8b8c94e57ee046ef93dbb7633da8612ca1"
+        }
+      ],
+      "size_gb": 4.0,
+      "vram_gb": 12,
+      "license": "Apache 2.0",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/Comfy-Org/SeedVR2"
+    },
+    {
+      "id": "prompt-llm",
+      "name": "Qwen3.5 9B \u2014 prompt and vision assistant",
+      "category": "text",
+      "description": "Aligned Qwen3.5 model, quantized by Unsloth, for multilingual ideas, English generation prompts and local visual safety checks. SFW rules apply to every request and result.",
+      "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+      "files": [
+        {
+          "filename": "Qwen3.5-9B-Q6_K.gguf",
+          "dest": "llm",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "size_bytes": 7458301152,
+          "sha256": "91898433cf5ce0a8f45516a4cc3e9343b6e01d052d01f684309098c66a326c59"
+        },
+        {
+          "filename": "mmproj-F16.gguf",
+          "save_as": "Qwen3.5-9B-mmproj-F16.gguf",
+          "dest": "llm",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "size_bytes": 918166080,
+          "sha256": "f70dc3509053962b0d0d3ee8a7eacebf5d60aa560cad78254ae8698516ae029f"
+        }
+      ],
+      "size_gb": 8.0,
+      "vram_gb": 9,
+      "license": "Apache 2.0 (Qwen3.5 and Unsloth GGUF conversion)",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF"
+    },
+    {
+      "id": "prompt-llm-lite",
+      "name": "Qwen3.5 9B Lite \u2014 prompt and vision assistant",
+      "category": "text",
+      "description": "Q4_K_M weights of the same assistant and safety-check model. For GPUs with 8\u201312 GB of VRAM.",
+      "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+      "files": [
+        {
+          "filename": "Qwen3.5-9B-Q4_K_M.gguf",
+          "dest": "llm",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "size_bytes": 5680522464,
+          "sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8"
+        },
+        {
+          "filename": "mmproj-F16.gguf",
+          "save_as": "Qwen3.5-9B-mmproj-F16.gguf",
+          "dest": "llm",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "size_bytes": 918166080,
+          "sha256": "f70dc3509053962b0d0d3ee8a7eacebf5d60aa560cad78254ae8698516ae029f"
+        }
+      ],
+      "size_gb": 6.6,
+      "vram_gb": 7,
+      "license": "Apache 2.0 (Qwen3.5 and Unsloth GGUF conversion)",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF"
+    },
+    {
+      "id": "zimage-train-adapter",
+      "name": "Z-Image Turbo training adapter",
+      "category": "train",
+      "description": "Training adapter used to create character LoRAs while retaining the distilled image model speed.",
+      "repo_id": "ostris/zimage_turbo_training_adapter",
+      "files": [
+        {
+          "filename": "zimage_turbo_training_adapter_v2.safetensors",
+          "dest": "train",
+          "revision": "654cd1bf8b3589d9442cb1c5e35221879e1af4f3",
+          "size_bytes": 340194488,
+          "sha256": "20a541d3e016ab8de0da076321b48b6cd9b3ffd072d9df830a068220ab2265f6"
+        }
+      ],
+      "size_gb": 0.3,
+      "vram_gb": 0,
+      "license": "Apache 2.0",
+      "commercial": true,
+      "recommended": false,
+      "source_url": "https://huggingface.co/ostris/zimage_turbo_training_adapter"
+    },
+    {
+      "id": "face-check",
+      "name": "Face quality check \u2014 OpenCV YuNet and SFace",
+      "category": "qc",
+      "description": "CPU face detection and character identity comparison for optional quality control.",
+      "repo_id": "opencv/face_recognition_sface",
+      "files": [
+        {
+          "filename": "face_recognition_sface_2021dec.onnx",
+          "dest": "qc",
+          "revision": "3d7082438a6e4551e840c9b2bb60b71e8da4b524",
+          "size_bytes": 38696353,
+          "sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+        },
+        {
+          "repo_id": "opencv/face_detection_yunet",
+          "filename": "face_detection_yunet_2023mar.onnx",
+          "dest": "qc",
+          "revision": "3cc26e7f1014a5ee5d74a42acee58bafc9d0a310",
+          "size_bytes": 232589,
+          "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+        }
+      ],
+      "size_gb": 0.04,
+      "vram_gb": 0,
+      "license": "Apache 2.0 (SFace); MIT (YuNet)",
+      "commercial": true,
+      "recommended": true,
+      "source_url": "https://huggingface.co/opencv/face_recognition_sface"
+    }
+  ]
+}

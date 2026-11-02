@@ -1,0 +1,6 @@
+# Windows scripts keep CRLF in every checkout and in GitHub ZIP downloads (cmd.exe misreads labels with LF).
+*.bat text eol=crlf
+# Internal files stay out of the public copy made by tools/make_public_snapshot.py (git archive).
+docs/internal/ export-ignore
+tools/make_public_snapshot.py export-ignore
+tests/test_public_snapshot.py export-ignore

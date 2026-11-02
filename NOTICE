@@ -1,0 +1,32 @@
+Contsy Studio
+Copyright 2026 Karol Kosciolek
+
+Contsy Studio's own code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the Free
+Software Foundation, version 3 only (SPDX: GPL-3.0-only). See LICENSE.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+Some files keep the licenses of the projects they come from:
+- app/lipsync_worker.py is adapted from the LatentSync inference script,
+  Copyright (c) 2024 Bytedance Ltd. and/or its affiliates, Apache License 2.0
+  (LICENSES/Apache-2.0.txt). Contsy's changes are under GPL-3.0-only.
+- patches/ComfyUI-Frame-Interpolation/ changes ComfyUI-Frame-Interpolation,
+  Copyright (c) 2023 Fannovel16, and stays under the MIT License like that
+  project (patches/ComfyUI-Frame-Interpolation/LICENSE).
+- The sidebar icons in app/ui_theme.py follow the geometry of Lucide icons,
+  Copyright (c) 2026 Lucide Icons and Contributors, ISC License
+  (LICENSES/ISC-Lucide.txt).
+
+This repository contains no third-party model weights, engine binaries or Python
+packages. The installer downloads them from their upstream sources and they keep
+their own licenses: see THIRD_PARTY_NOTICES.md, MODEL_LICENSES.md and
+docs/LICENSING.md.
+
+Background sound uses Stable Audio Open 1.0, downloaded from its provider:
+Powered by Stability AI.
+This Stability AI Model is licensed under the Stability AI Community License,
+Copyright © Stability AI Ltd. All Rights Reserved.
+License: https://stability.ai/community-license-agreement

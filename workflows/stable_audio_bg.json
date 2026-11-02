@@ -1,0 +1,109 @@
+{
+  "_note": "Stable Audio Open 1.0: tlo dzwiekowe z opisu (wg oficjalnego przykladu ComfyUI). Latent zawsze ma pelne okno modelu (47.6 s) - model byl uczony tylko na takich; krotki latent dawal przypadkowe odglosy. Dlugosc dzwieku %SECONDS% idzie w warunkowaniu (seconds_total), a plik przycinamy po wygenerowaniu.",
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "%CKPT%"
+    }
+  },
+  "10": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "%CLIP%",
+      "type": "stable_audio",
+      "device": "default"
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "%POSITIVE%",
+      "clip": [
+        "10",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "%NEGATIVE%",
+      "clip": [
+        "10",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "EmptyLatentAudio",
+    "inputs": {
+      "seconds": 47.6,
+      "batch_size": 1
+    }
+  },
+  "12": {
+    "class_type": "ConditioningStableAudio",
+    "inputs": {
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "seconds_start": 0.0,
+      "seconds_total": "%SECONDS%"
+    }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": "%SEED%",
+      "steps": 100,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_3m_sde_gpu",
+      "scheduler": "exponential",
+      "denoise": 1.0,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "12",
+        0
+      ],
+      "negative": [
+        "12",
+        1
+      ],
+      "latent_image": [
+        "11",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    }
+  },
+  "19": {
+    "class_type": "SaveAudio",
+    "inputs": {
+      "filename_prefix": "aistudio_bg",
+      "audio": [
+        "13",
+        0
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_note": "Wan 2.2 A14B tekst->wideo (GGUF) z LoRA lightx2v: 4 kroki, cfg 1. Ekspert high-noise robi kroki 0..%SPLIT%, low-noise reszte (jak oficjalny szablon ComfyUI wan2.2_14B_t2v z LoRA 4-step). Wynik 16 fps interpolowany RIFE x%RIFE_MULT%.",
+  "1": {"class_type": "UnetLoaderGGUF", "inputs": {"unet_name": "%UNET_HIGH%"}},
+  "2": {"class_type": "UnetLoaderGGUF", "inputs": {"unet_name": "%UNET_LOW%"}},
+  "3": {"class_type": "LoraLoaderModelOnly", "inputs": {"lora_name": "%LORA_HIGH%", "strength_model": "%LORA_STRENGTH%", "model": ["1", 0]}},
+  "4": {"class_type": "LoraLoaderModelOnly", "inputs": {"lora_name": "%LORA_LOW%", "strength_model": "%LORA_STRENGTH%", "model": ["2", 0]}},
+  "5": {"class_type": "ModelSamplingSD3", "inputs": {"shift": "%SHIFT%", "model": ["3", 0]}},
+  "6": {"class_type": "ModelSamplingSD3", "inputs": {"shift": "%SHIFT%", "model": ["4", 0]}},
+  "38": {"class_type": "CLIPLoader", "inputs": {"clip_name": "%CLIP%", "type": "wan", "device": "default"}},
+  "39": {"class_type": "VAELoader", "inputs": {"vae_name": "%VAE%"}},
+  "10": {"class_type": "CLIPTextEncode", "inputs": {"text": "%POSITIVE%", "clip": ["38", 0]}},
+  "11": {"class_type": "CLIPTextEncode", "inputs": {"text": "%NEGATIVE%", "clip": ["38", 0]}},
+  "20": {"class_type": "EmptyHunyuanLatentVideo", "inputs": {"width": "%WIDTH%", "height": "%HEIGHT%", "length": "%LENGTH%", "batch_size": 1}},
+  "30": {"class_type": "KSamplerAdvanced", "inputs": {"add_noise": "enable", "noise_seed": "%SEED%", "steps": "%STEPS%", "cfg": "%CFG%", "sampler_name": "euler", "scheduler": "simple", "start_at_step": 0, "end_at_step": "%SPLIT%", "return_with_leftover_noise": "enable", "model": ["5", 0], "positive": ["10", 0], "negative": ["11", 0], "latent_image": ["20", 0]}},
+  "31": {"class_type": "KSamplerAdvanced", "inputs": {"add_noise": "disable", "noise_seed": "%SEED%", "steps": "%STEPS%", "cfg": "%CFG%", "sampler_name": "euler", "scheduler": "simple", "start_at_step": "%SPLIT%", "end_at_step": 10000, "return_with_leftover_noise": "disable", "model": ["6", 0], "positive": ["10", 0], "negative": ["11", 0], "latent_image": ["30", 0]}},
+  "40": {"class_type": "VAEDecode", "inputs": {"samples": ["31", 0], "vae": ["39", 0]}},
+  "50": {"class_type": "RIFE VFI", "inputs": {"ckpt_name": "rife49.pth", "clear_cache_after_n_frames": 10, "multiplier": "%RIFE_MULT%", "fast_mode": false, "ensemble": true, "scale_factor": 1.0, "dtype": "float32", "torch_compile": false, "batch_size": 1, "frames": ["40", 0], "source_fps": 16, "target_fps": "%FPS%"}},
+  "60": {"class_type": "ImageFromBatch", "inputs": {"image": ["40", 0], "batch_index": "%LAST_INDEX%", "length": 1}},
+  "61": {"class_type": "SaveImage", "inputs": {"images": ["60", 0], "filename_prefix": "aistudio_last"}},
+  "90": {"class_type": "VHS_VideoCombine", "inputs": {"frame_rate": "%FPS%", "loop_count": 0, "filename_prefix": "aistudio_vid", "format": "video/h264-mp4", "pingpong": false, "save_output": true, "images": ["50", 0]}}
+}

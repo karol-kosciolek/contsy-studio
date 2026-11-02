@@ -1,0 +1,40 @@
+name: Bug report
+description: Something does not work as described.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach private photos, voices or personal data. Report security problems privately (see SECURITY.md).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the screen and mode, for example Video → Fast.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: GPU and VRAM
+      placeholder: RTX 4070 Ti Super, 16 GB
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: System RAM, NVIDIA driver, Windows version
+      placeholder: 64 GB, 621.01, Windows 11 24H2
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant part of comfyui.log
+      render: text

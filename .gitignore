@@ -1,0 +1,40 @@
+# Python environment
+venv/
+venv.preserved_*/
+.*.install_*/
+__pycache__/
+*.pyc
+
+# Engine and models (downloaded by the installer / model manager)
+ComfyUI/
+models/
+outputs/
+vendor/
+
+# Local data (characters, photos, queue, user settings) - never commit
+characters/
+kopia_postaci_testowej/
+queue_files/
+config/settings.local.json
+config/queue.json
+config/queue.tmp
+config/user_prefs.json
+history/
+*.log
+
+# Manual backups and measurements
+repair-backup-*/
+performance-*/
+
+# Results and weights - in case they end up outside the folders above
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.mp4
+*.zip
+*.tmp
+.pytest_cache/
+
+# Content packs (derived from results; legacy folder name)
+paczki/

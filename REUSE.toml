@@ -1,0 +1,30 @@
+version = 1
+
+# Files that cannot carry an SPDX header. Python sources and .bat scripts carry their own.
+[[annotations]]
+path = [
+  "README.md", "NOTICE", "CONTRIBUTING.md", "SECURITY.md", "MODEL_LICENSES.md", "THIRD_PARTY_NOTICES.md",
+  "docs/**", ".github/**", "config/**", "requirements.txt", "REUSE.toml",
+  ".gitignore", ".gitattributes",
+]
+SPDX-FileCopyrightText = "2026 Karol Kosciolek"
+SPDX-License-Identifier = "GPL-3.0-only"
+
+# Workflow graphs follow the structure of ComfyUI's official workflow templates
+# (Comfy-Org/workflow_templates, MIT).
+[[annotations]]
+path = "workflows/**"
+SPDX-FileCopyrightText = ["2026 Karol Kosciolek", "2023-present Comfy Org"]
+SPDX-License-Identifier = "GPL-3.0-only AND MIT"
+
+[[annotations]]
+path = "patches/ComfyUI-Frame-Interpolation/**"
+precedence = "override"
+SPDX-FileCopyrightText = ["2023 Fannovel16", "2026 Karol Kosciolek"]
+SPDX-License-Identifier = "MIT"
+
+# Synthetic voices generated with VoxCPM2 from text alone (docs/LICENSING.md, "Resolved").
+[[annotations]]
+path = "assets/voices/**"
+SPDX-FileCopyrightText = "2026 Karol Kosciolek"
+SPDX-License-Identifier = "GPL-3.0-only"

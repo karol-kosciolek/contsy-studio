@@ -1,0 +1,184 @@
+{
+  "_note": "SeedVR2 3B (Apache 2.0, wbudowany w ComfyUI): wideo 720p -> 1080p. Wg oficjalnego szablonu utility_seedvr2_3b_int8_upscale_video: skalowanie lanczos do docelowego rozmiaru, SeedVR2 w 1 kroku dorysowuje szczegoly, korekta kolorow lab. Dlugie wideo dzielone w czasie na kawalki po %CHUNK% klatek (tryb auto przy zapasie 10.7 GiB dawal na 16 GB po 1 klatce - wolno i z ryzykiem migotania) z zakladka %OVERLAP% klatek latentu.",
+  "1": {
+    "class_type": "LoadVideo",
+    "inputs": {
+      "file": "%VIDEO%"
+    }
+  },
+  "2": {
+    "class_type": "GetVideoComponents",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "%VAE%"
+    }
+  },
+  "7": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "%UNET%",
+      "weight_dtype": "default"
+    }
+  },
+  "3": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "2",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": "%WIDTH%",
+      "height": "%HEIGHT%",
+      "crop": "disabled"
+    }
+  },
+  "4": {
+    "class_type": "SeedVR2Preprocess",
+    "inputs": {
+      "resized_images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEEncodeTiled",
+    "inputs": {
+      "pixels": [
+        "4",
+        0
+      ],
+      "vae": [
+        "5",
+        0
+      ],
+      "tile_size": 1024,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    }
+  },
+  "12": {
+    "class_type": "VAEDecodeTiled",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "5",
+        0
+      ],
+      "tile_size": 1024,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    }
+  },
+  "13": {
+    "class_type": "SeedVR2PostProcessing",
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ],
+      "original_resized_images": [
+        "3",
+        0
+      ],
+      "color_correction_method": "lab"
+    }
+  },
+  "8": {
+    "class_type": "SeedVR2TemporalChunk",
+    "inputs": {
+      "latent": [
+        "6",
+        0
+      ],
+      "temporal_overlap": "%OVERLAP%",
+      "chunking_mode": "manual",
+      "chunking_mode.frames_per_chunk": "%CHUNK%"
+    }
+  },
+  "9": {
+    "class_type": "SeedVR2Conditioning",
+    "inputs": {
+      "model": [
+        "7",
+        0
+      ],
+      "vae_conditioning": [
+        "8",
+        0
+      ]
+    }
+  },
+  "10": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": "%SEED%",
+      "steps": 1,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "9",
+        0
+      ],
+      "negative": [
+        "9",
+        1
+      ],
+      "latent_image": [
+        "8",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "SeedVR2TemporalMerge",
+    "inputs": {
+      "latents": [
+        "10",
+        0
+      ],
+      "temporal_overlap": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "frame_rate": "%FPS%",
+      "loop_count": 0,
+      "filename_prefix": "aistudio_1080p",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 16,
+      "save_metadata": false,
+      "pingpong": false,
+      "save_output": true
+    }
+  }
+}

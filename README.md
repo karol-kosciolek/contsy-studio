@@ -11,7 +11,9 @@ Free and open source · Private · No subscription · Runs on NVIDIA graphics ca
 ![NVIDIA GPU, 8 GB+](https://img.shields.io/badge/NVIDIA-8%20GB%2B%20VRAM-76B900)
 ![Runs 100% locally](https://img.shields.io/badge/runs-100%25%20locally-success)
 
-<!-- DEMO: hero video (30–60 s). Upload it in the GitHub editor and paste the user-attachments link here. -->
+[![Watch the 52-second demo](docs/media/demo.jpg)](https://youtu.be/N3sf5vsdiBQ)
+
+**▶ [Watch the 52-second demo](https://youtu.be/N3sf5vsdiBQ)**
 
 </div>
 
@@ -25,7 +27,25 @@ Free and open source · Private · No subscription · Runs on NVIDIA graphics ca
 
 Built on [ComfyUI](https://github.com/Comfy-Org/ComfyUI) with Wan 2.2, Qwen Image Edit, Z-Image Turbo, SeedVR2, VoxCPM2 and LatentSync.
 
-<!-- DEMO: 4–6 screenshots. -->
+<p align="center">
+  <img src="docs/media/07-autopilot-dashboard.png" width="49%" alt="Dashboard with Autopilot switched on">
+  <img src="docs/media/08-content-packs.png" width="49%" alt="Content Packs: ready-to-post captions for Instagram and TikTok">
+</p>
+
+<p align="center">
+  <img src="docs/media/06-persona-autopilot.png" width="49%" alt="Persona and autopilot schedule suggested by the local AI">
+  <img src="docs/media/02-gallery.png" width="49%" alt="Gallery: photos and videos of the same AI character">
+</p>
+
+<p align="center">
+  <img src="docs/media/04-video.png" width="49%" alt="Video page: a prompt with dialogue and the finished talking video">
+  <img src="docs/media/03-image.png" width="49%" alt="Image page: a one-sentence prompt and the 1080p photo it produced">
+</p>
+
+<p align="center">
+  <img src="docs/media/05-training.png" width="49%" alt="Training page: 20 photos in, a consistent character out">
+  <img src="docs/media/01-dashboard.png" width="49%" alt="Dashboard with the trained character Ola and her latest results">
+</p>
 
 ## Install in 3 steps
 
